@@ -1,49 +1,85 @@
-import React from 'react'
-import './Sidebar.css'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import AddIcon from '@material-ui/icons/Add'
-import SidebarChannel from './SidebarChannel'
-import SignalCellularAltIcon from '@material-ui/icons/SignalCellularAlt'
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined'
-import CallIcon from '@material-ui/icons/Call'
-import { Avatar } from '@material-ui/core'
-import MicIcon from '@material-ui/icons/Mic'
-import HeadsetIcon from '@material-ui/icons/Headset'
-import SettingsIcon from '@material-ui/icons/Settings'
-import { useSelector } from 'react-redux'
-import { selectUser } from './features/userSlice'
-import db, { auth } from './firebase'
-import { useState } from 'react'
-import { useEffect } from 'react'
+import React, { useState, useContext, useEffect } from "react";
+import "./Sidebar.css";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import AddIcon from "@material-ui/icons/Add";
+import SidebarChannel from "./SidebarChannel";
+import { Avatar } from "@material-ui/core";
+import MicIcon from "@material-ui/icons/Mic";
+import HeadsetIcon from "@material-ui/icons/Headset";
+import SettingsIcon from "@material-ui/icons/Settings";
+import firebase, { database } from "./firebase";
+import { AuthContext } from "./AuthProvider";
 
 const Sidebar = () => {
-    const user = useSelector(selectUser)
-    const [channels, setChannels] = useState([])
+    let [user, setUser] = useState(null);
+    const [channels, setChannels] = useState([]);
+ 
+    let { genericLogout, currentUser } = useContext(AuthContext)
+    let auth = firebase.auth();
 
     useEffect(() => {
-        db.collection('channels').onSnapshot(snapshot => {
-            setChannels(snapshot.docs.map(doc => ({
-                id: doc.id,
-                channel: doc.data()
-            })))
-        })
-    }, [])
+        database.channels.onSnapshot((snapshot) => {
+            setChannels(
+                snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    channel: doc.data(),
+                }))
+            );
+        });
 
+        database.users.doc(currentUser.uid).onSnapshot((doc) => {
+            setUser(doc.data());
+        });
+    }, []);
+    
+    const logOutFn = async () => {
+        await genericLogout()
+    }
     const handleAddChannel = (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
-        const channelName = prompt('Enter a new channel name')
+        const channelName = prompt("Enter a new channel name");
 
         if (channelName) {
-            db.collection('channels').add({
-                channelName: channelName
-            })
-
+            database.channels.add({
+                channelName: channelName,
+            });
         }
-    }
 
-    return (
-        <div className='sidebar' >
+        database.channels.get().then((doc) => {
+            const documents = doc.docs.map((doc) => ({
+                id: doc.id,
+                channel: doc.data()
+            }));
+
+            documents.forEach((ele) => {
+                if (channelName === ele.channel.channelName) {
+                    let updatedChannels = [];
+                    if (user.channels) {
+                        updatedChannels = [...user.channels, ele.id]
+                    }
+                    else {
+                        updatedChannels = [ele.id]
+                    }
+
+                    database.users.doc(currentUser.uid).update({
+                        channels : updatedChannels
+                    })
+
+                    setUser({ ...user, channels: updatedChannels });
+                    let updateduser = [user]
+                    database.channels.doc(ele.id).update({
+                        channelName : channelName,
+                        users : updateduser
+                    })
+                }
+            })
+        })
+    };
+
+
+    return user ? (
+        <div className="sidebar">
             <div className="sidebar__top">
                 <h3>Clever Programmer</h3>
                 <ExpandMoreIcon />
@@ -56,35 +92,22 @@ const Sidebar = () => {
                         <h4>Text Channels</h4>
                     </div>
 
-                    <AddIcon onClick={handleAddChannel} className='sidebar__addChannel' />
+                    <AddIcon onClick={handleAddChannel} className="sidebar__addChannel" />
                 </div>
                 <div className="sidebar__channelsList">
-                    {
-                        channels.map(({ id, channel }) => (
-                            <SidebarChannel key={id} id={id} channelName={channel.channelName} />
-                        ))
-                    }
+                    {user.channels ? user.channels.map((id) => (
+                        // console.log(id) 
+                        <SidebarChannel key={id} id={id} />
+                    )) : <></>}
                 </div>
             </div>
 
-            <div className="sidebar__voice">
-                <SignalCellularAltIcon className='sidebar__voiceIcons' fontSize='large' />
-                <div className="sidebar__voiceInfo">
-                    <h3>Voice Connected</h3>
-                    <p>Stream</p>
-                </div>
-
-                <div className="sidebar__voiceIcons">
-                    <InfoOutlinedIcon />
-                    <CallIcon />
-                </div>
-            </div>
             <div className="sidebar__profile">
-                <Avatar src={user.photo} onClick={() => auth.signOut()} />
+                <Avatar alt={user.username} src="/broken-image.jpg" onClick={logOutFn} />
                 <div className="sidebar__profileInfo">
-                    <h3>{user.displayName}</h3>
-                    <p>#{user.uid.substring(0, 5)}</p>
-                </div>
+                <h3>{user.username}</h3>
+                <p>#{currentUser.uid.substring(0, 5)}</p>
+            </div>
 
                 <div className="sidebar__profileIcons">
                     <MicIcon />
@@ -93,7 +116,9 @@ const Sidebar = () => {
                 </div>
             </div>
         </div>
-    )
-}
+    ) : (
+        <></>
+    );
+};
 
-export default Sidebar
+export default Sidebar;

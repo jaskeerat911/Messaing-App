@@ -1,3 +1,7 @@
+.sidebarChannel{
+    margin-bottom: 10px;
+}
+
 .sidebarChannel:hover>h4 {
     color: white;
     background-color: #40464b;
@@ -12,7 +16,7 @@
     cursor: pointer;
 }
 
-.sidebarChannel__hash{
-    font-size: 30px;
-    padding: 8px;
+.sidebarChannel>h4>.MuiAvatar-root{
+    background-color: #42464b;
+    margin-right: 10px;
 }

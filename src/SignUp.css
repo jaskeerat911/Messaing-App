@@ -1,0 +1,36 @@
+.signup__container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup{
+    background-color: #363a3f;
+    padding: 40px;
+    border-radius: 20px;
+}
+
+.signup__header{
+    margin-bottom: 20px;
+}
+
+.signup__header>h2{
+    text-align: center;
+    color: #ffff;
+    margin-bottom: 5px;
+}
+
+.signup > div:last-child{
+    text-align: center;
+}
+
+.signup > div:last-child > a{
+    color: #5865F2;
+    text-decoration: none;
+}
+
+.signup > div:last-child:hover > a{
+    text-decoration: underline;
+}

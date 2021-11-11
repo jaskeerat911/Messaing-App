@@ -81,6 +81,11 @@
 
 .sidebar__profileInfo>h3 {
     color: white;
+    font-size: 15px;
+}
+
+.sidebar__profileInfo>p {
+    font-size: 13px;
 }
 
 .sidebar__profileIcons>.MuiSvgIcon-root {

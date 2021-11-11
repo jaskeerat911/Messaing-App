@@ -1,14 +1,22 @@
 import firebase from 'firebase'
 
 const firebaseConfig = {
-    // your firebase config
+    apiKey: "AIzaSyBdZoSJIHwhWJbhSlrEU7xtoy05Ucu5pMk",
+    authDomain: "chat-app-23ce6.firebaseapp.com",
+    projectId: "chat-app-23ce6",
+    storageBucket: "chat-app-23ce6.appspot.com",
+    messagingSenderId: "374689419180",
+    appId: "1:374689419180:web:026ba98633a33212207409"
 };
 
-const firebaseApp = firebase.initializeApp(firebaseConfig)
+firebase.initializeApp(firebaseConfig)
+const firestore = firebase.firestore();
 
-const db = firebaseApp.firestore()
-const auth = firebase.auth()
-const provider = new firebase.auth.GoogleAuthProvider()
+export const database = {
+    users: firestore.collection('users'),
+    channels : firestore.collection('channels')
+}
 
-export { auth, provider }
-export default db
+export const provider = new firebase.auth.GoogleAuthProvider()
+
+export default firebase;

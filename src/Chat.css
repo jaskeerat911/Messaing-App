@@ -6,6 +6,19 @@
     height: 100vh;
 }
 
+.chat__body {
+    height: 100%;
+    display: flex;
+}
+
+.chat__messages__body {
+    width: 75%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .chat__input {
     color: lightgray;
     display: flex;
@@ -13,13 +26,12 @@
     justify-content: space-between;
     padding: 15px;
     border-radius: 5px;
-    margin: 20px;
     border-top: 1px solid gray;
     background-color: #474b53;
 }
 
-.chat__input>form>input {
-    padding: 15px;
+.chat__input > form > input {
+    padding: 5px 15px;
     background: transparent;
     width: 100%;
     border: none;
@@ -29,7 +41,7 @@
     outline: none;
 }
 
-.chat__input>form {
+.chat__input > form {
     flex: 1;
     display: flex;
 }
@@ -42,10 +54,90 @@
     border: none;
 }
 
-.chat__inputIcons>.MuiSvgIcon-root {
+.chat__inputIcons {
+    background-color: #fff;
+}
+
+.chat__inputIcons > .MuiSvgIcon-root {
     padding: 5px;
 }
 
-.chat__messages{
+.chat__messages {
     flex: 1;
+    max-height: 30.9rem;
+    height: 12rem;
+    overflow: auto;
+}
+
+/* width */
+.chat__messages::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+.chat__messages::-webkit-scrollbar-track {
+    background: #26282c;
+}
+
+/* Handle */
+.chat__messages::-webkit-scrollbar-thumb {
+    background: #474b53;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+.chat__messages::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.channel__description {
+    width: 25%;
+    height: 100%;
+    background-color: #2f3135;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.channel__title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.channel__title > .MuiSvgIcon-root {
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    color: #ffff;
+    margin-left: auto;
+}
+
+.channel__title > .MuiSvgIcon-root:hover {
+    background-color: #42464b;
+    border-radius: 50%;
+}
+
+.channel__title > .MuiAvatar-root {
+    background-color: #42464b;
+}
+
+.channel__title > h1 {
+    padding: 0 10px;
+    color: #fff;
+}
+
+.channel__users > .user {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.channel__users > .user > .MuiAvatar-root {
+    background-color: #42464b;
+    margin-right: 10px;
+}
+
+.channel__users > .user > span {
+    color: #ffff;
+    font-weight: bolder;
 }
