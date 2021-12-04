@@ -49,7 +49,7 @@ function SignUp() {
                 </div>
                 <div className="input__container">
                     <div className="input__field">
-                        <h4>Email</h4>
+                        <h5>EMAIL</h5>
                         <input
                             type="email"
                             value={email}
@@ -59,7 +59,7 @@ function SignUp() {
                         />
                     </div>
                     <div className="input__field">
-                        <h4>UserName</h4>
+                        <h5>FULL NAME</h5>
                         <input
                             type="text"
                             value={username}
@@ -69,7 +69,7 @@ function SignUp() {
                         />
                     </div>
                     <div className="input__field">
-                        <h4>Password</h4>
+                        <h5>PASSWORD</h5>
                         <input
                             type="password"
                             value={password}
@@ -79,7 +79,7 @@ function SignUp() {
                         />
                     </div>
                     <div className="input__field">
-                        <h4>Region</h4>
+                        <h5>REGION</h5>
                         <input
                             type="text"
                             value={region}
@@ -90,7 +90,7 @@ function SignUp() {
                     </div>
                     <div className="button__container">
                         <Button id="logIn" onClick={signupFn}>
-                            Sign Up
+                            SignUp
                         </Button>
                     </div>
                 </div>

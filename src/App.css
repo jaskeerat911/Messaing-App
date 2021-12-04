@@ -1,7 +1,25 @@
+:root{
+    --header-primary: #ffff;
+    --header-secondary: #b9bbbe;
+    --header-tertiary: gray;
+
+    --background-primary: #363a3f;
+    --background-secondary: #2f3136;
+    --background-secondary-alt: #292b2f;
+    --background-tertiary: #202225;
+
+    --button-bg: #5865f2;
+    --button-hover: #3a46cc;
+    --button-controls-hover: #ffff;
+
+    --text-input-bg: rgba(0,0,0,0.1);
+    --text-input-border: rgba(0,0,0,0.3);
+    --text-input-border-hover: #040405;
+    --text-normal: #dcddde;
+    --text-link: #00aff4;
+}
+
 .container{
     width: 100vw;
     height: 100vh;
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
 }

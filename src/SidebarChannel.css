@@ -2,21 +2,21 @@
     margin-bottom: 10px;
 }
 
-.sidebarChannel:hover>h4 {
+.sidebarChannel>div {
+    display: flex;
+    padding-left: 15px;
+    align-items: center;
+    color: var(--header-primary);
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.sidebarChannel:hover>div {
     color: white;
     background-color: #40464b;
 }
 
-.sidebarChannel>h4 {
-    display: flex;
-    padding-left: 15px;
-    align-items: center;
-    background-color: #2f3135;
-    color: gray;
-    cursor: pointer;
-}
-
-.sidebarChannel>h4>.MuiAvatar-root{
-    background-color: #42464b;
-    margin-right: 10px;
+.sidebarChannel>div>h1{
+    margin-right: 14px;
+    color: var(--header-tertiary);
 }

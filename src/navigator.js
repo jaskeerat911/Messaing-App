@@ -15,14 +15,14 @@ function navigator() {
                     <Route exact path="/feed" element={<PrivateRoute />}>
                         <Route exact path="/feed" element={<Feed />} />
                     </Route>
-                    <Route path="/" element={<Navigate replace to="/login" />}></Route>
+                    <Route path="/" element={<Navigate replace to="/feed" />}></Route>
                 </Routes>
             </AuthProvider>
         </>
     );
 }
 
-function PrivateRoute({ children }) {
+function PrivateRoute() {
     let { currentUser } = useContext(AuthContext);
 
     return currentUser ? <Outlet /> : <Navigate to="/login" />;

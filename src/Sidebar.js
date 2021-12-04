@@ -3,12 +3,30 @@ import "./Sidebar.css";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AddIcon from "@material-ui/icons/Add";
 import SidebarChannel from "./SidebarChannel";
-import { Avatar } from "@material-ui/core";
+import { Avatar, Tooltip, makeStyles } from "@material-ui/core";
 import MicIcon from "@material-ui/icons/Mic";
 import HeadsetIcon from "@material-ui/icons/Headset";
 import SettingsIcon from "@material-ui/icons/Settings";
 import firebase, { database } from "./firebase";
 import { AuthContext } from "./AuthProvider";
+
+const useStylesBootstrap = makeStyles((theme) => ({
+    arrow: {
+        color: '#0a0a0a'
+    },
+    tooltip: {
+        backgroundColor: '#0a0a0a',
+        fontSize: '12px',
+        fontWeight: '600',
+        padding: '10px'
+    }
+}))
+
+function BootstrapTooltip(props) {
+    const classes = useStylesBootstrap();
+
+    return <Tooltip arrow classes={classes} {...props} />;
+}
 
 const Sidebar = () => {
     let [user, setUser] = useState(null);
@@ -92,11 +110,12 @@ const Sidebar = () => {
                         <h4>Text Channels</h4>
                     </div>
 
-                    <AddIcon onClick={handleAddChannel} className="sidebar__addChannel" />
+                    <BootstrapTooltip title='Add Channel' placement="right" arrow >
+                        <AddIcon onClick={handleAddChannel} className="sidebar__addChannel" />
+                    </BootstrapTooltip>
                 </div>
                 <div className="sidebar__channelsList">
                     {user.channels ? user.channels.map((id) => (
-                        // console.log(id) 
                         <SidebarChannel key={id} id={id} />
                     )) : <></>}
                 </div>

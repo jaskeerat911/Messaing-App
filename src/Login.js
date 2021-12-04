@@ -1,18 +1,17 @@
 import { Button } from "@material-ui/core";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./Login.css";
-import firebase from "./firebase";
 import { AuthContext } from "./AuthProvider";
 import Loader from "./Loader";
 
-const Login = (props) => {
+const Login = () => {
     let [email, setEmail] = useState("");
     let [password, setPassword] = useState("");
     let [loginLoader, setLoginLoader] = useState(false);
     let history = useNavigate();
 
-    let { genericlogin, currentUser } = useContext(AuthContext);
+    let { genericlogin, currentUser} = useContext(AuthContext);
 
     const loginFn = async () => {
         try {
@@ -28,18 +27,25 @@ const Login = (props) => {
         }
     };
 
+    useEffect(() => {
+        if (currentUser) {
+            history('/feed');
+        }
+        return;
+    })
+
     return loginLoader ? (
         <Loader></Loader>
     ) : (
         <div className="login__container">
-            <div className="login">
+            <div className="login active">
                 <div className="login__header">
                     <h2>Welcome Back!</h2>
                     <div>We're so excited to see you again</div>
                 </div>
                 <div className="input__container">
                     <div className="input__field">
-                        <h4>Email</h4>
+                        <h5>EMAIL</h5>
                         <input
                             type="email"
                             value={email}
@@ -49,7 +55,7 @@ const Login = (props) => {
                         />
                     </div>
                     <div className="input__field">
-                        <h4>Password</h4>
+                        <h5>PASSWORD</h5>
                         <input
                             type="password"
                             value={password}
@@ -61,7 +67,7 @@ const Login = (props) => {
                 </div>
                 <div className="button__container">
                     <Button id="logIn" onClick={loginFn}>
-                        Log In
+                        LogIn
                     </Button>
                 </div>
                 <div>

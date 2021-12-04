@@ -4,30 +4,42 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url(https://img.wallpapersafari.com/desktop/1920/1080/4/61/ypDTNV.jpg);
+    background-size: cover;
 }
 
 .signup{
-    background-color: #363a3f;
-    padding: 40px;
-    border-radius: 20px;
+    background-color: var(--background-primary);
+    padding: 30px;
+    border-radius: 7px;
+    animation: popup 0.2s;
+}
+
+@keyframes popup {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 .signup__header{
+    text-align: center;
     margin-bottom: 20px;
 }
 
 .signup__header>h2{
-    text-align: center;
-    color: #ffff;
+    color: var(--header-primary);
     margin-bottom: 5px;
 }
 
 .signup > div:last-child{
-    text-align: center;
+    font-size: small;
 }
 
 .signup > div:last-child > a{
-    color: #5865F2;
+    color: var(--text-link);
     text-decoration: none;
 }
 

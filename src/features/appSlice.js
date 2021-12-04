@@ -14,9 +14,9 @@ export const appSlice = createSlice({
     },
 });
 
-export const { setChannelInfo } = appSlice.actions;
+export const { setChannelInfo } = appSlice.actions; //set Current Channel
 
-export const selectChannelId = (state) => state.app.channelId;
-export const selectChannelName = (state) => state.app.channelName;
+export const selectChannelId = (state) => state.app.channelId; // get current channel id
+export const selectChannelName = (state) => state.app.channelName; // get current channel name
 
 export default appSlice.reducer;

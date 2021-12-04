@@ -1,9 +1,9 @@
 .chat {
     display: flex;
     flex-direction: column;
-    flex: 0.75;
     background-color: #363a3f;
-    height: 100vh;
+    height: 100%;
+    width: 80%;
 }
 
 .chat__body {
@@ -42,7 +42,6 @@
 }
 
 .chat__input > form {
-    flex: 1;
     display: flex;
 }
 
@@ -63,7 +62,6 @@
 }
 
 .chat__messages {
-    flex: 1;
     max-height: 30.9rem;
     height: 12rem;
     overflow: auto;
