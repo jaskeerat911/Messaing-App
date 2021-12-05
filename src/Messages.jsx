@@ -4,6 +4,7 @@ import Message from "./Message";
 import { selectChannelId, selectChannelName } from "./features/appSlice";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import EmojiEmoticonsIcon from "@material-ui/icons/EmojiEmotions";
+import SendIcon from '@material-ui/icons/Send';
 import { AuthContext } from './AuthProvider';
 import { database } from "./firebase";
 import firebase from "firebase";
@@ -56,7 +57,7 @@ function Messages(props) {
                     </div>
 
                     <div className="chat__input">
-                        <AddCircleIcon fontSize="medium" />
+                        {/* <AddCircleIcon fontSize="medium" />
                         <form>
                             <input
                                 type="text"
@@ -75,7 +76,16 @@ function Messages(props) {
 
                         <div className="chat__inputIcon">
                             <EmojiEmoticonsIcon fontSize="medium" />
-                        </div>
+                        </div> */}
+                        <EmojiEmoticonsIcon fontSize="medium" />
+                        <input
+                            type="text"
+                            disabled={!channelId}
+                            value={input}
+                            onChange={(e) => setInput(e.target.value)}
+                            placeholder={`Message #${channelName}`}
+                        />
+                        <SendIcon/>
                     </div>
                 </div>
     )

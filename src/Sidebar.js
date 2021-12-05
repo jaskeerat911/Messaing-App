@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext} from "react";
 import "./Sidebar.css";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AddIcon from "@material-ui/icons/Add";
@@ -19,7 +19,8 @@ const useStylesBootstrap = makeStyles((theme) => ({
         backgroundColor: '#0a0a0a',
         fontSize: '12px',
         fontWeight: '600',
-        padding: '10px'
+        padding: '10px',
+        margin: '0'
     }
 }))
 
@@ -45,40 +46,42 @@ const Sidebar = (props) => {
         if (channelName) {
             database.channels.add({
                 channelName: channelName,
-                users: user.userId
+                users: [user.userId]
             });
         }
 
 
-        // database.channels.get().then((doc) => {
-        //     const documents = doc.docs.map((doc) => ({
-        //         id: doc.id,
-        //         channel: doc.data()
-        //     }));
+        //need optimisation
+        database.channels.get().then((doc) => {
+            const documents = doc.docs.map((doc) => ({
+                id: doc.id,
+                channel: doc.data()
+            }));
 
-        //     documents.forEach((ele) => {
-        //         if (channelName === ele.channel.channelName) {
-        //             let updatedChannels = [];
-        //             if (user.channels) {
-        //                 updatedChannels = [...user.channels, ele.id]
-        //             }
-        //             else {
-        //                 updatedChannels = [ele.id]
-        //             }
+            documents.forEach((ele) => {
+                if (channelName === ele.channel.channelName) {
+                    let updatedChannels = [];
+                    if (user.channels) {
+                        updatedChannels = [...user.channels, ele.id]
+                    }
+                    else {
+                        updatedChannels = [ele.id]
+                    }
 
-        //             database.users.doc(user.userId).update({
-        //                 channels : updatedChannels
-        //             })
+                    database.users.doc(user.userId).update({
+                        channels : updatedChannels
+                    })
 
-        //             setUser({ ...user, channels: updatedChannels });
-        //             let updateduser = [user]
-        //             database.channels.doc(ele.id).update({
-        //                 channelName : channelName,
-        //                 users : updateduser
-        //             })
-        //         }
-        //     })
-        // })
+                    // // setUser({ ...user, channels: updatedChannels });
+                    // user = { ...user, channels: updatedChannels };
+                    // let updateduser = [user]
+                    // database.channels.doc(ele.id).update({
+                    //     channelName : channelName,
+                    //     users : updateduser
+                    // })
+                }
+            })
+        })
     };
 
 

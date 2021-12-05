@@ -11,23 +11,23 @@ const ChatHeader = ({ channelName }) => {
     return (
         <div className='chatHeader' >
             <div className="chatHeader__left">
-            {channelName ? <h3><span className="chatHeader__hash">#</span>
-                    {channelName}
-            </h3> : <></>}
+                {channelName ? <h3><span className="chatHeader__hash">#</span>
+                        {channelName}
+                </h3> : <></>}
             </div>
 
             <div className="chatHeader__right">
-                <NotificationsIcon />
-                <EditLocationRounded />
-                <PeopleAltRounded />
+                <NotificationsIcon className = "control" />
+                <EditLocationRounded className = "control" />
+                <PeopleAltRounded className = "control" />
 
-                <div className="chatHeader__search">
+                <div className="chatHeader__search control">
                     <input type="text" placeholder='Search' />
                     <SearchRoundedIcon />
                 </div>
 
-                <SendRoundedIcon />
-                <HelpRoundedIcon />
+                <SendRoundedIcon className = "control"/>
+                <HelpRoundedIcon className = "control"/>
             </div>
         </div>
     )

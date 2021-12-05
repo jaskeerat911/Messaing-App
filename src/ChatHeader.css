@@ -2,7 +2,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10.5px;
+    padding: 7.5px;
+    min-height: 40px;
     color: var(--header-tertiary);
     border-bottom: 2px solid #26282c;
 }
@@ -10,8 +11,9 @@
 .chatHeader__hash {
     color: var(--header-tertiary);
     font-size: 30px;
-    padding: 2.5px 10px;
+    padding: 0 10px;
 }
+
 
 .chatHeader__left>h3 {
     display: flex;
