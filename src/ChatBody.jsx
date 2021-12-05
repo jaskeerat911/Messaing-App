@@ -5,7 +5,7 @@ import ChannelDescription from './ChannelDescription'
 function ChatBody(props) {
     return (
         <div className = 'chat__body'>
-            <Messages channelId={props.channelId} channelName={props.channelName} />
+            <Messages user ={props.user} channelId={props.channelId} channelName={props.channelName} />
             <ChannelDescription channelId={props.channelId} channelName={props.channelName}/>
         </div>
     )

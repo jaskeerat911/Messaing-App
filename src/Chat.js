@@ -5,14 +5,14 @@ import ChatBody from "./ChatBody";
 import { useSelector } from "react-redux";
 import { selectChannelId, selectChannelName } from "./features/appSlice";
 
-const Chat = () => {
+const Chat = (props) => {
     const channelId = useSelector(selectChannelId);
     const channelName = useSelector(selectChannelName);
 
     return (
         <div className="chat">
             <ChatHeader channelName={channelName} />
-            <ChatBody channelId={channelId} channelName={channelName}/>
+            <ChatBody user = {props.user} channelId={channelId} channelName={channelName}/>
         </div>
     );
 };

@@ -1,16 +1,27 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { database } from './firebase';
 import SideBar from "./Sidebar"
 import Chat from './Chat';
 import './feed.css'
+import { database } from "./firebase";
 import { AuthContext } from './AuthProvider';
+import Loader from "./Loader"
 
 function Feed() {
+    let [user, setUser] = useState(null);
+    let { currentUser } = useContext(AuthContext);
+
+    useEffect(() => {
+        database.users.doc(currentUser.uid).onSnapshot((doc) => {
+            setUser(doc.data());
+        })
+    }, [currentUser])
     return (
-        <div className= 'feed'>
-            <SideBar />
-            <Chat />
-        </div>
+        user ? 
+            <div className= 'feed'>
+                <SideBar user ={user} />
+                <Chat user = {user} />
+            </div> :
+            <Loader/>
     )
 }
 

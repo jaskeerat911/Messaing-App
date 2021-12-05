@@ -1,7 +1,7 @@
 .chat {
     display: flex;
     flex-direction: column;
-    background-color: #363a3f;
+    background-color: var(--background-primary);
     height: 100%;
     width: 80%;
 }
@@ -26,11 +26,11 @@
     justify-content: space-between;
     padding: 15px;
     border-radius: 5px;
-    border-top: 1px solid gray;
+    border-top: 1px solid var(--header-tertiary);
     background-color: #474b53;
 }
 
-.chat__input > form > input {
+.chat__input > form > input {   
     padding: 5px 15px;
     background: transparent;
     width: 100%;

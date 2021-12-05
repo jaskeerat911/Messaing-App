@@ -8,14 +8,12 @@ import { AuthContext } from './AuthProvider';
 import { database } from "./firebase";
 import firebase from "firebase";
 
-function Messages() {
+function Messages(props) {
+    let { user } = props;
     const channelId = useSelector(selectChannelId);
     const channelName = useSelector(selectChannelName);
-    let [user, setUser] = useState(null);
     let [input, setInput] = useState("");
     let [messages, setMessages] = useState([]);
-
-    let { currentUser } = useContext(AuthContext);
 
     useEffect(() => {
         if (channelId) {
@@ -28,10 +26,7 @@ function Messages() {
                 });
         }
 
-        database.users.doc(currentUser.uid).onSnapshot((doc) => {
-            setUser(doc.data());
-        });
-    }, [channelId, currentUser]);
+    }, [channelId]);
 
     const sendMessage = (e) => {
         e.preventDefault();

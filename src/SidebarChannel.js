@@ -12,7 +12,7 @@ const SidebarChannel = ({ id }) => {
         database.channels.doc(id).onSnapshot((doc) => {
             setChannelData(doc.data())
         })
-    }, [])
+    }, [id])
 
 
     return (
