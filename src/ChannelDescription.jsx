@@ -7,16 +7,16 @@ import { selectChannelId, selectChannelName } from "./features/appSlice";
 
 const useStylesBootstrap = makeStyles((theme) => ({
     arrow: {
-        color: '#0a0a0a'
+        color: "#0a0a0a",
     },
     tooltip: {
-        backgroundColor: '#0a0a0a',
-        fontSize: '12px',
-        fontWeight: '600',
-        padding: '10px',
-        margin: '0'
-    }
-}))
+        backgroundColor: "#0a0a0a",
+        fontSize: "12px",
+        fontWeight: "600",
+        padding: "10px",
+        margin: "0",
+    },
+}));
 
 function BootstrapTooltip(props) {
     const classes = useStylesBootstrap();
@@ -32,7 +32,15 @@ function ChannelDescription() {
     useEffect(() => {
         if (channelId) {
             database.channels.doc(channelId).onSnapshot((snapshot) => {
-                setUsers(snapshot.data().users);
+                // setUsers(snapshot.data().users);
+                let allUsersId = snapshot.data().users;
+                let allUsersData = [];
+                snapshot.data().users.map((userId) => {
+                    database.users.doc(userId).onSnapshot((doc) => {
+                        let userData = doc.data();
+                        allUsersData.push(userData);
+                    })
+                })
             });
         }
     }, [channelId, users]);
@@ -70,21 +78,23 @@ function ChannelDescription() {
                     <div className="channel__title">
                         <h3>#</h3>
                         <h2>{channelName}</h2>
-                        <BootstrapTooltip title='Add User' placement="top" arrow >
+                        <BootstrapTooltip title="Add User" placement="top" arrow>
                             <AddIcon className="channel__addUser" onClick={handleAddUser} />
                         </BootstrapTooltip>
                     </div>
                     <div className="channel__users">
-                        {/* {users ? (
-                            users.map((user) => (
-                                <div className="user">
-                                    <Avatar alt={user.username} src="/broken-image.jpg" />
-                                    <span>{user.username}</span>
-                                </div>
-                            ))
+                        .
+                        {users ? (
+                            users.map((user) =>
+                                console.log(user.username)
+                                // <div className="user">
+                                //     <Avatar alt={user.username} src="/broken-image.jpg" />
+                                //     <span>{user.username}</span>
+                                // </div>
+                            )
                         ) : (
                             <></>
-                        )} */}
+                        )}
                     </div>
                 </>
             ) : (
