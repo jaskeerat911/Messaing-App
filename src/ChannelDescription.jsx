@@ -32,18 +32,37 @@ function ChannelDescription() {
     useEffect(() => {
         if (channelId) {
             database.channels.doc(channelId).onSnapshot((snapshot) => {
-                // setUsers(snapshot.data().users);
                 let allUsersId = snapshot.data().users;
+                // setUsers(allUsersId);
+                
                 let allUsersData = [];
-                snapshot.data().users.map((userId) => {
-                    database.users.doc(userId).onSnapshot((doc) => {
-                        let userData = doc.data();
-                        allUsersData.push(userData);
-                    })
+                allUsersId.map((userId) => {
+                    let data = database.users.doc(userId).get();
+                    allUsersData.push(data);
                 })
+                
+                Promise.all(allUsersData).then(function (values) {
+                    let arr = [];
+                    values.forEach(doc => {
+                        arr.push(doc.data())
+                    });
+                    setUsers(arr);
+                });
+
+                // for (let i = 0; i < allUsersId.length; i++){
+                //     database.users.doc(allUsersId[i]).onSnapshot((doc) => {
+                //         allUsersData.push(doc.data());
+                //         allUsersData.push(doc.data());
+                        
+                //         if (i === allUsersId.length - 1) {
+                //             console.log(allUsersData)
+                //         }
+                //     })
+                // }
             });
         }
-    }, [channelId, users]);
+
+    }, [channelId]);
 
     const handleAddUser = (e) => {
         e.preventDefault();
@@ -86,11 +105,10 @@ function ChannelDescription() {
                         .
                         {users ? (
                             users.map((user) =>
-                                console.log(user.username)
-                                // <div className="user">
-                                //     <Avatar alt={user.username} src="/broken-image.jpg" />
-                                //     <span>{user.username}</span>
-                                // </div>
+                                <div className="user">
+                                    <Avatar alt={user.username} src="/broken-image.jpg" />
+                                    <span>{user.username}</span>
+                                </div>
                             )
                         ) : (
                             <></>
