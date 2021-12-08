@@ -35,18 +35,18 @@ function ChannelDescription() {
                 let allUsersId = snapshot.data().users;
                 // setUsers(allUsersId);
                 
-                let allUsersData = [];
+                let allUsers = [];
                 allUsersId.map((userId) => {
                     let data = database.users.doc(userId).get();
-                    allUsersData.push(data);
+                    allUsers.push(data);
                 })
                 
-                Promise.all(allUsersData).then(function (values) {
-                    let arr = [];
-                    values.forEach(doc => {
-                        arr.push(doc.data())
+                Promise.all(allUsers).then(function (user) {
+                    let allUsersData = [];
+                    user.forEach(doc => {
+                        allUsersData.push(doc.data())
                     });
-                    setUsers(arr);
+                    setUsers(allUsersData);
                 });
 
                 // for (let i = 0; i < allUsersId.length; i++){
@@ -102,7 +102,6 @@ function ChannelDescription() {
                         </BootstrapTooltip>
                     </div>
                     <div className="channel__users">
-                        .
                         {users ? (
                             users.map((user) =>
                                 <div className="user">
