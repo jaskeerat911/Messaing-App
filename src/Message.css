@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     padding: 20px;
-    color: white;
+    color: var(--header-primary);
 }
 
 .message__info{
@@ -10,7 +10,7 @@
 }
 
 .message__timestamp{
-    color: gray;
+    color: var(--header-tertiary);
     margin-left: 20px;
     font-size: x-small;
 }

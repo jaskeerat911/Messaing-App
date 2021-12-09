@@ -42,16 +42,12 @@
     flex: 1;
 }
 
-.chat__input > form {
-    display: flex;
+#sendIcon{
+    cursor: pointer;
 }
 
-.chat__inputButton {
-    /* display: none; */
-    width: 0;
-    height: 0;
-    background: none;
-    border: none;
+#sendIcon:hover {
+    color: var(--header-primary);
 }
 
 .chat__messages {
@@ -130,6 +126,6 @@
 }
 
 .channel__users > .user > span {
-    color: #ffff;
+    color: var(--header-primary);
     font-weight: bolder;
 }
