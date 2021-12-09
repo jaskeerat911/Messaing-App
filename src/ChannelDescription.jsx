@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Avatar, Tooltip, makeStyles } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
@@ -27,7 +27,8 @@ function BootstrapTooltip(props) {
 function ChannelDescription() {
     const channelId = useSelector(selectChannelId);
     const channelName = useSelector(selectChannelName);
-    let [users, setUsers] = useState([]);
+    let [usersInSelectedChannel, setUsersInSelectedChannel] = useState([]); // users in selected channel
+    let [allUsers, setAllUsers] = useState([]);
 
     useEffect(() => {
         if (channelId) {
@@ -46,7 +47,7 @@ function ChannelDescription() {
                     user.forEach(doc => {
                         allUsersData.push(doc.data())
                     });
-                    setUsers(allUsersData);
+                    setUsersInSelectedChannel(allUsersData);
                 });
 
                 // for (let i = 0; i < allUsersId.length; i++){
@@ -62,32 +63,70 @@ function ChannelDescription() {
             });
         }
 
+        database.users.get().then((doc) => {
+            let allUsersData = doc.docs.map((userData) => userData.data())
+
+            setAllUsers(allUsersData);
+        })
+
     }, [channelId]);
 
     const handleAddUser = (e) => {
         e.preventDefault();
 
         const userName = prompt("Enter a new user name");
+        
+        let flag = false;
+        allUsers.forEach((user) => {
+            if (userName === user.username) {
+                flag = true;
 
-        database.users.get().then((doc) => {
-            const documents = doc.docs.map((doc) => doc.data());
-            let flag = false;
-            documents.forEach((ele) => {
-                if (userName === ele.username) {
-                    let updatedUsers = [...users, ele];
-                    database.channels.doc(channelId).update({
-                        users: updatedUsers,
-                    });
+                let allUsersId = usersInSelectedChannel.map(user => user.userId);
+                let updatedChannelUsers = [...allUsersId, user.userId];
 
-                    flag = true;
-                    return;
+                // add new user to the selected channel database
+                database.channels.doc(channelId).update({ 
+                    users : updatedChannelUsers
+                })
+
+                let updatedChannels = [];
+                if (user.channels) {
+                    updatedChannels = [...user.channels, channelId]
                 }
-            });
+                else {
+                    updatedChannels = [channelId]
+                }
 
-            if (!flag) {
-                alert("User does not exist");
+                // add the selected channel to the user database
+                database.users.doc(user.userId).update({
+                    channels : updatedChannels
+                })
             }
-        });
+        })
+
+        if (!flag) {
+            alert("User does not exist")
+        }
+
+        // database.users.get().then((doc) => {
+        //     const documents = doc.docs.map((doc) => doc.data());
+        //     let flag = false;
+        //     documents.forEach((ele) => {
+        //         if (userName === ele.username) {
+        //             let updatedUsers = [...users, ele];
+        //             database.channels.doc(channelId).update({
+        //                 users: updatedUsers,
+        //             });
+
+        //             flag = true;
+        //             return;
+        //         }
+        //     });
+
+        //     if (!flag) {
+        //         alert("User does not exist");
+        //     }
+        // });
     };
 
     return (
@@ -102,8 +141,8 @@ function ChannelDescription() {
                         </BootstrapTooltip>
                     </div>
                     <div className="channel__users">
-                        {users ? (
-                            users.map((user) =>
+                        {usersInSelectedChannel ? (
+                            usersInSelectedChannel.map((user) =>
                                 <div className="user">
                                     <Avatar alt={user.username} src="/broken-image.jpg" />
                                     <span>{user.username}</span>
