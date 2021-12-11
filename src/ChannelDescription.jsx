@@ -34,7 +34,6 @@ function ChannelDescription() {
         if (channelId) {
             database.channels.doc(channelId).onSnapshot((snapshot) => {
                 let allUsersId = snapshot.data().users;
-                // setUsers(allUsersId);
                 
                 let allUsers = [];
                 allUsersId.map((userId) => {
@@ -107,26 +106,6 @@ function ChannelDescription() {
         if (!flag) {
             alert("User does not exist")
         }
-
-        // database.users.get().then((doc) => {
-        //     const documents = doc.docs.map((doc) => doc.data());
-        //     let flag = false;
-        //     documents.forEach((ele) => {
-        //         if (userName === ele.username) {
-        //             let updatedUsers = [...users, ele];
-        //             database.channels.doc(channelId).update({
-        //                 users: updatedUsers,
-        //             });
-
-        //             flag = true;
-        //             return;
-        //         }
-        //     });
-
-        //     if (!flag) {
-        //         alert("User does not exist");
-        //     }
-        // });
     };
 
     return (

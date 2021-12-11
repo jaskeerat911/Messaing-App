@@ -5,7 +5,10 @@ import { selectChannelId, selectChannelName } from "./features/appSlice";
 import EmojiEmoticonsIcon from "@material-ui/icons/EmojiEmotions";
 import SendIcon from '@material-ui/icons/Send';
 import { database } from "./firebase";
-import firebase from "firebase";
+// import firebase from "firebase";
+import { Picker } from "emoji-mart"
+import "emoji-mart/css/emoji-mart.css";
+import { Emoji } from 'emoji-mart';
 
 function Messages(props) {
     let { user } = props;
@@ -13,6 +16,7 @@ function Messages(props) {
     const channelName = useSelector(selectChannelName);
     let [input, setInput] = useState("");
     let [messages, setMessages] = useState([]);
+    let [showEmojis, setShowEmojis] = useState(false);
 
     useEffect(() => {
         if (channelId) {
@@ -41,6 +45,13 @@ function Messages(props) {
         setInput("");
     };
 
+    const addEmoji = (e) => {
+        let emojiCode = e.unified.split("-");
+        let emoji = String.fromCodePoint("0x" + emojiCode);
+        console.log(emoji)
+        setInput(input + emoji)
+    }
+
     return (
         <div className="chat__messages__body">
                     <div className="chat__messages">
@@ -58,15 +69,22 @@ function Messages(props) {
 
                     {channelName ? 
                         <div className="chat__input">
-                            <EmojiEmoticonsIcon fontSize="medium" />
+                            <EmojiEmoticonsIcon className = "chat-icons" fontSize="medium" onClick={() => setShowEmojis(!showEmojis)}/>
+                            {showEmojis && (
+                                <div className="emoji-picker">
+                                    <Picker onSelect={addEmoji} theme = "dark"/>
+                                </div>
+                            )}
+
                             <input
                                 type="text"
                                 disabled={!channelId}
                                 value={input}
+                                onClick={() => setShowEmojis(false)}
                                 onChange={(e) => setInput(e.target.value)}
                                 placeholder={`Message #${channelName}`}
                             />
-                            <SendIcon id="sendIcon" onClick ={sendMessage} onKeyDown ={sendMessage}/>
+                            <SendIcon className = "chat-icons" onClick ={sendMessage} onKeyDown ={sendMessage}/>
                         </div> : 
                         <></>    
                     }

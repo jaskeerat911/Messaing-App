@@ -105,7 +105,6 @@ const Sidebar = (props) => {
                     </BootstrapTooltip>
                 </div>
                 <div className="sidebar__channelsList">
-                    {console.log(user)}
                     {user.channels ? user.channels.map((id) => (
                         <SidebarChannel key={id} id={id} />
                     )) : <></>}

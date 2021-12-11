@@ -27,6 +27,7 @@
     margin: 0 15px 25px 15px;
     border-radius: 10px;
     background-color: var(--text-area);
+    position: relative;
 }
 
 .chat__input > input {   
@@ -42,12 +43,17 @@
     flex: 1;
 }
 
-#sendIcon{
+.chat__input > .chat-icons{
     cursor: pointer;
 }
 
-#sendIcon:hover {
+.chat__input > .chat-icons:hover {
     color: var(--header-primary);
+}
+
+.chat__input > .emoji-picker{
+    position: absolute;
+    bottom: 55px;
 }
 
 .chat__messages {
