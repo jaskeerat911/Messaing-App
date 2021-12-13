@@ -4,12 +4,16 @@ import { NavLink, useNavigate } from "react-router-dom";
 import "./Login.css";
 import { AuthContext } from "./AuthProvider";
 import Loader from "./Loader";
+import { setChannelInfo } from './features/appSlice'
+import { useDispatch } from 'react-redux'
+
 
 const Login = () => {
     let [email, setEmail] = useState("");
     let [password, setPassword] = useState("");
     let [loginLoader, setLoginLoader] = useState(false);
     let history = useNavigate();
+    const dispatch = useDispatch();
 
     let { genericlogin, currentUser} = useContext(AuthContext);
 
@@ -18,6 +22,10 @@ const Login = () => {
             setLoginLoader(true);
             await genericlogin(email, password);
             setLoginLoader(false);
+            dispatch(setChannelInfo({
+                channelId: null,
+                channelName: null
+            }));
             history("/feed");
         } catch (err) {
             setLoginLoader(false);
