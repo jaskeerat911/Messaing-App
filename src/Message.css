@@ -1,8 +1,12 @@
 .message{
     display: flex;
     align-items: center;
-    padding: 20px;
+    padding: 10px 20px;
     color: var(--header-primary);
+}
+
+.message > .MuiAvatar-root{
+    background-color: #42464b;
 }
 
 .message__info{

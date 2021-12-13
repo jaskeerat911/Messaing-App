@@ -89,7 +89,7 @@ const Sidebar = (props) => {
     return user ? (
         <div className="sidebar">
             <div className="sidebar__top">
-                <h3>Clever Programmer</h3>
+                <h3>{user.username}</h3>
                 <ExpandMoreIcon />
             </div>
 

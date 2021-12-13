@@ -6,12 +6,15 @@ import { AuthContext } from "./AuthProvider";
 import Loader from "./Loader";
 import { setChannelInfo } from './features/appSlice'
 import { useDispatch } from 'react-redux'
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 
 
 const Login = () => {
     let [email, setEmail] = useState("");
     let [password, setPassword] = useState("");
     let [loginLoader, setLoginLoader] = useState(false);
+    let [passwordShown, setPasswordShown] = useState(false);
     let history = useNavigate();
     const dispatch = useDispatch();
 
@@ -65,13 +68,19 @@ const Login = () => {
                     <div className="input__field">
                         <h5>PASSWORD</h5>
                         <input
-                            type="password"
+                            type={passwordShown ? "text" : "password"}
                             value={password}
                             onChange={function (e) {
                                 setPassword(e.target.value);
                             }}
                         />
+                        {passwordShown ? 
+                            <VisibilityOffIcon className="password-visibility" onClick={() => setPasswordShown(false)}/> : 
+                            <VisibilityIcon className="password-visibility" onClick={() => setPasswordShown(true)}/>
+                        }
                     </div>
+                    
+                        
                 </div>
                 <div className="button__container">
                     <Button id="logIn" onClick={loginFn}>

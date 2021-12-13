@@ -42,8 +42,21 @@
     margin-bottom: 15px;
 }
 
+.input__field > .password-visibility:hover{
+    color: var(--header-primary);
+}
+
 .input__field {
     margin-bottom: 20px;
+    position: relative;
+}
+
+.input__field > .password-visibility{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    color: var(--header-tertiary);
+    cursor: pointer;
 }
 
 .input__field > h5 {

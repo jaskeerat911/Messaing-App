@@ -5,10 +5,9 @@ import { selectChannelId, selectChannelName } from "./features/appSlice";
 import EmojiEmoticonsIcon from "@material-ui/icons/EmojiEmotions";
 import SendIcon from '@material-ui/icons/Send';
 import { database } from "./firebase";
-// import firebase from "firebase";
+import firebase from "firebase";
 import { Picker } from "emoji-mart"
 import "emoji-mart/css/emoji-mart.css";
-import { Emoji } from 'emoji-mart';
 
 function Messages(props) {
     let { user } = props;
@@ -34,14 +33,14 @@ function Messages(props) {
     const sendMessage = (e) => {
         e.preventDefault();
 
-        // database.channels.doc(channelId).collection("messages").add({
-        //     message: input,
-        //     user: user,
-        //     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        // });
+        database.channels.doc(channelId).collection("messages").add({
+            message: input,
+            userId: user.userId,
+            username: user.username,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        });
 
         console.log(input)
-
         setInput("");
     };
 
@@ -62,7 +61,7 @@ function Messages(props) {
                             <Message
                                 message={message.message}
                                 timestamp={message.timestamp}
-                                user={message.user}
+                                user={message.username}
                             />
                         ))}
                     </div>

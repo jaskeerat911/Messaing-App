@@ -5,6 +5,8 @@ import { database } from "./firebase";
 import { NavLink, useNavigate } from "react-router-dom";
 import Loader from "./Loader";
 import "./SignUp.css";
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 
 function SignUp() {
     let [email, setEmail] = useState("");
@@ -12,6 +14,7 @@ function SignUp() {
     let [username, setUsername] = useState("");
     let [region, setRegion] = useState("");
     let [loader, setLoader] = useState(false);
+    let [passwordShown, setPasswordShown] = useState(false);
     let history = useNavigate();
 
     let { genericSignup } = useContext(AuthContext);
@@ -71,13 +74,18 @@ function SignUp() {
                     <div className="input__field">
                         <h5>PASSWORD</h5>
                         <input
-                            type="password"
+                            type={passwordShown ? "text" : "password"}
                             value={password}
                             onChange={function (e) {
                                 setPassword(e.target.value);
                             }}
                         />
+                        {passwordShown ? 
+                            <VisibilityOffIcon className="password-visibility" onClick={() => setPasswordShown(false)}/> : 
+                            <VisibilityIcon className="password-visibility" onClick={() => setPasswordShown(true)}/>
+                        }
                     </div>
+                    
                     <div className="input__field">
                         <h5>REGION</h5>
                         <input

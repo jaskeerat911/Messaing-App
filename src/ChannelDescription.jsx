@@ -123,6 +123,7 @@ function ChannelDescription() {
                         {usersInSelectedChannel ? (
                             usersInSelectedChannel.map((user) =>
                                 <div className="user">
+                                    {/* <Avatar src={'./DefaultAvatar.png'} /> */}
                                     <Avatar alt={user.username} src="/broken-image.jpg" />
                                     <span>{user.username}</span>
                                 </div>

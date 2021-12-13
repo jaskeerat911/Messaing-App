@@ -3,16 +3,14 @@ import React from "react";
 import "./Message.css";
 
 const Message = ({ timestamp, user, message }) => {
-    // const Message = ({ message }) => {
-
-    // console.log(message)
+    console.log(user)
 
     return (
         <div className="message">
-            <Avatar alt={user.username} src="/broken-image.jpg" />
+            <Avatar alt={user} src="/broken-image.jpg" />
             <div className="message__info">
                 <h4>
-                    {user.username}
+                    {user}
                     <span className="message__timestamp">
                         {new Date(timestamp?.toDate()).toUTCString()}
                     </span>
