@@ -58,7 +58,6 @@
 
 .chat__messages {
     max-height: 30.9rem;
-    height: 12rem;
     overflow: auto;
 }
 

@@ -1,24 +1,32 @@
 import { Avatar } from "@material-ui/core";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./Message.css";
+import { database } from "./firebase";
 
-const Message = ({ timestamp, user, message }) => {
-    console.log(user)
+const Message = ({ timestamp, userId, message }) => {
+    let [userData, SetUserData] = useState(null);
+
+    useEffect(() => {
+        database.users.doc(userId).onSnapshot((doc) => {
+            SetUserData(doc.data());
+        });
+    })
 
     return (
-        <div className="message">
-            <Avatar alt={user} src="/broken-image.jpg" />
-            <div className="message__info">
-                <h4>
-                    {user}
-                    <span className="message__timestamp">
-                        {new Date(timestamp?.toDate()).toUTCString()}
-                    </span>
-                </h4>
+        userData ?
+            <div className="message">
+                <Avatar alt={userData.username} src="/broken-image.jpg" />
+                <div className="message__info">
+                    <h4>
+                        {userData.username}
+                        <span className="message__timestamp">
+                            {new Date(timestamp?.toDate()).toUTCString()}
+                        </span>
+                    </h4>
 
-                <p>{message}</p>
-            </div>
-        </div>
+                    <p>{message}</p>
+                </div>
+            </div> : <></>
     );
 };
 

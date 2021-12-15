@@ -3,10 +3,12 @@
     --header-secondary: #b9bbbe;
     --header-tertiary: gray;
 
-    --background-primary: #363a3f;
+    --background-primary: #36393f;
     --background-secondary: #2f3136;
     --background-secondary-alt: #292b2f;
     --background-tertiary: #202225;
+
+    --tooltip: #18191b;
 
     --button-bg: #5865f2;
     --button-hover: #3a46cc;
@@ -18,9 +20,12 @@
     --text-normal: #dcddde;
     --text-link: #00aff4;
     --text-area: #40444b;
+    --text-danger : #ed4245;
 }
 
 .container{
     width: 100vw;
     height: 100vh;
+    background-color: var(--background-primary);
+    box-sizing: border-box;
 }

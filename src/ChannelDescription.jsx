@@ -7,14 +7,15 @@ import { selectChannelId, selectChannelName } from "./features/appSlice";
 
 const useStylesBootstrap = makeStyles((theme) => ({
     arrow: {
-        color: "#0a0a0a",
+        color: "#18191b",
     },
     tooltip: {
-        backgroundColor: "#0a0a0a",
+        backgroundColor: "#18191b",
         fontSize: "12px",
         fontWeight: "600",
         padding: "10px",
         margin: "0",
+        boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.6)"
     },
 }));
 

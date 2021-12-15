@@ -36,7 +36,6 @@ function Messages(props) {
         database.channels.doc(channelId).collection("messages").add({
             message: input,
             userId: user.userId,
-            username: user.username,
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         });
 
@@ -61,7 +60,7 @@ function Messages(props) {
                             <Message
                                 message={message.message}
                                 timestamp={message.timestamp}
-                                user={message.username}
+                                userId={message.userId}
                             />
                         ))}
                     </div>

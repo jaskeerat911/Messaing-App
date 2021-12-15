@@ -1,4 +1,5 @@
-.sidebarChannel{
+.sidebarChannel_container{
+    padding: 0 5px;
     margin-bottom: 10px;
 }
 
@@ -11,7 +12,7 @@
     font-weight: 600;
 }
 
-.sidebarChannel:hover>div {
+.sidebarChannel_container:hover {
     color: white;
     background-color: #40464b;
 }
@@ -20,3 +21,12 @@
     margin-right: 14px;
     color: var(--header-tertiary);
 }   
+
+.sidebarChannel.selected{
+    background-color: var(--button-bg);
+    border-radius: 5px;
+}
+
+.sidebarChannel.selected > div > h1{
+    color: var(--background-primary);
+}

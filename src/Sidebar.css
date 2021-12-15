@@ -47,7 +47,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: gray;
+    color: var(--header-tertiary);
     background-color: var(--background-secondary-alt);
     padding: 0 10px;
 
@@ -72,6 +72,53 @@
     font-size: 13px;
 }
 
+.sidebar__profileIcons{
+    position: relative;
+}
+
 .sidebar__profileIcons>.MuiSvgIcon-root {
     padding: 5px;
+}
+
+.sidebar__profileIcons>#profile_settings{
+    cursor: pointer;
+}
+
+.sidebar__profileIcons>#profile_settings:hover{
+    color: var(--header-primary);
+}
+
+.sidebar__profileIcons>.dropdown{
+    display: none;
+    position: absolute;
+    bottom: 40px;
+    left: 70%;
+    background-color: var(--tooltip);
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 2;
+}
+
+
+.sidebar__profileIcons>.dropdown>.dropdown_content{
+    min-width: 120px;
+    padding: 10px;
+    color: #b9bbbe;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+}
+
+.sidebar__profileIcons>.dropdown>.dropdown_content:hover{
+    background-color: var(--button-hover);
+    color: #ffff;
+    border-radius: 5px;
+}
+
+.sidebar__profileIcons>.dropdown>hr{
+    border: none;
+    height: 1px;
+    background-color: rgb(88, 87, 87);
 }
