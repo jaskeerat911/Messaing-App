@@ -61,6 +61,11 @@
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
+}
+
+.user_profile > .profile_container > .user_profile_card > .user_info > button:hover{
+    background-color: var(--button-hover);
 }
 
 .user_profile > .profile_container > .user_profile_card > .change_info_controls{

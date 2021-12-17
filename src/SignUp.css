@@ -46,3 +46,7 @@
 .signup > div:last-child:hover > a{
     text-decoration: underline;
 }
+
+/* #default_avatar{
+    display: none;
+} */

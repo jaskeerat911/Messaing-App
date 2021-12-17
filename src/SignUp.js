@@ -1,12 +1,12 @@
 import { Button } from "@material-ui/core";
 import React, { useContext, useState } from "react";
 import { AuthContext } from "./AuthProvider";
-import { database } from "./firebase";
+import { storage, database } from "./firebase";
 import { NavLink, useNavigate } from "react-router-dom";
 import Loader from "./Loader";
 import "./SignUp.css";
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 
 function SignUp() {
     let [email, setEmail] = useState("");
@@ -15,6 +15,7 @@ function SignUp() {
     let [region, setRegion] = useState("");
     let [loader, setLoader] = useState(false);
     let [passwordShown, setPasswordShown] = useState(false);
+    let [file, setFile] = useState(null);
     let history = useNavigate();
 
     let { genericSignup } = useContext(AuthContext);
@@ -29,7 +30,7 @@ function SignUp() {
                 userId: uid,
                 email: email,
                 username: username,
-                region : region
+                region: region,
             });
 
             history("/feed");
@@ -80,12 +81,19 @@ function SignUp() {
                                 setPassword(e.target.value);
                             }}
                         />
-                        {passwordShown ? 
-                            <VisibilityOffIcon className="password-visibility" onClick={() => setPasswordShown(false)}/> : 
-                            <VisibilityIcon className="password-visibility" onClick={() => setPasswordShown(true)}/>
-                        }
+                        {passwordShown ? (
+                            <VisibilityOffIcon
+                                className="password-visibility"
+                                onClick={() => setPasswordShown(false)}
+                            />
+                        ) : (
+                            <VisibilityIcon
+                                className="password-visibility"
+                                onClick={() => setPasswordShown(true)}
+                            />
+                        )}
                     </div>
-                    
+
                     <div className="input__field">
                         <h5>REGION</h5>
                         <input
@@ -102,6 +110,22 @@ function SignUp() {
                         </Button>
                     </div>
                 </div>
+                {/* <input
+                    id="default_avatar"
+                    type="hidden"
+                    name="myvalue"
+                    src="/Avatars/default.png"
+                    alt=""
+                /> */}
+                {/* <input
+                    id="default_avatar"
+                    type="file"
+                    accept="image/*"
+                    onChange={function (e) {
+                        let file = e.target.files[0];
+                        if (file != null) setFile(file);
+                    }}
+                /> */}
                 <div>
                     <NavLink to="/login">Already have an account?</NavLink>
                 </div>

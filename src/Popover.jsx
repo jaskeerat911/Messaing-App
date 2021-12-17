@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import "./Popover.css";
 import CloseIcon from "@material-ui/icons/Close";
 import { database } from "./firebase";
@@ -63,6 +63,21 @@ function Popover({ title, user, setPopover }) {
             });
     };
 
+    const handleAvatar = (e) => {
+        let selectedAvatar = document.querySelector(".popover_container > .popover > .avatar_container > .avatars > .avatar.selected");
+        let previewContainer = document.querySelector(".popover_container > .popover > .avatar_container > .avatar_preview_container > img")
+        let avatarSrc = e.target.getAttribute("src");
+
+        previewContainer.setAttribute("src", avatarSrc);
+
+        if (selectedAvatar) {
+            selectedAvatar.classList.remove("selected");
+        }
+
+        e.currentTarget.classList.add("selected");
+
+    }
+
     return user ? (
         <div className="popover_container">
             {title === "username" && (
@@ -97,7 +112,7 @@ function Popover({ title, user, setPopover }) {
                         </div>
                     </div>
                     <div className="button_container">
-                        <button id="cancel">Cancel</button>
+                        <button id="cancel" onClick={() => setPopover("")}>Cancel</button>
                         <button id="done" onClick={handleChanges}>
                             Done
                         </button>
@@ -137,7 +152,7 @@ function Popover({ title, user, setPopover }) {
                         </div>
                     </div>
                     <div className="button_container">
-                        <button id="cancel">Cancel</button>
+                        <button id="cancel" onClick={() => setPopover("")}>Cancel</button>
                         <button id="done" onClick={handleChanges}>
                             Done
                         </button>
@@ -177,7 +192,64 @@ function Popover({ title, user, setPopover }) {
                         </div>
                     </div>
                     <div className="button_container">
-                        <button id="cancel">Cancel</button>
+                        <button id="cancel" onClick={() => setPopover("")}>Cancel</button>
+                        <button id="done" onClick={handleChanges}>
+                            Done
+                        </button>
+                    </div>
+                    <CloseIcon id="close" onClick={() => setPopover("")}/>
+                </div>
+            )}
+            {title === "avatar" && (
+                <div className="popover">
+                    <div className="popover_heading">
+                        <h2>Change avatar</h2>
+                    </div>
+                    <div className="avatar_container">
+                        <div className="avatars">
+                            <div className="avatar selected" onClick={handleAvatar}>
+                                <img src="/Avatars/default.png" alt="" />
+                            </div>
+                            <div className="avatar" onClick={handleAvatar}>
+                                <img src="/Avatars/Avatar_1.png" alt="" />
+                            </div>
+                            <div className="avatar" onClick={handleAvatar}>
+                                <img src="/Avatars/Avatar_2.png" alt="" />
+                            </div>
+                            <div className="avatar" onClick={handleAvatar}>
+                                <img src="/Avatars/Avatar_3.png" alt="" />
+                            </div>
+                            <div className="avatar" onClick={handleAvatar}>
+                                <img src="/Avatars/Avatar_4.png" alt="" />
+                            </div>
+                            <div className="avatar" onClick={handleAvatar}>
+                                <img src="/Avatars/Avatar_5.png" alt="" />
+                            </div>
+                            <div className="avatar" onClick={handleAvatar}>
+                                <img src="/Avatars/Avatar_6.png" alt="" />
+                            </div>
+                            <div className="avatar" onClick={handleAvatar}>
+                                <img src="/Avatars/Avatar_7.png" alt="" />
+                            </div>
+                            <div className="avatar" onClick={handleAvatar}>
+                                <img src="/Avatars/Avatar_8.png" alt="" />
+                            </div>
+                            <div className="avatar" onClick={handleAvatar}>
+                                <img src="/Avatars/Avatar_9.png" alt="" />
+                            </div>
+                            <div className="avatar" onClick={handleAvatar}>
+                                <img src="/Avatars/Avatar_10.png" alt="" />
+                            </div>
+                            <div className="avatar" onClick={handleAvatar}>
+                                <img src="/Avatars/Avatar_11.png" alt="" />
+                            </div>
+                        </div>
+                        <div className="avatar_preview_container">
+                            <img src="/Avatars/default.png" alt="Avatar" />
+                        </div>
+                    </div>
+                    <div className="button_container">
+                        <button id="cancel" onClick={() => setPopover("")}>Cancel</button>
                         <button id="done" onClick={handleChanges}>
                             Done
                         </button>

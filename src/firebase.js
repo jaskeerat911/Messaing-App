@@ -11,12 +11,11 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig)
 const firestore = firebase.firestore();
+export const storage = firebase.storage();
 
 export const database = {
     users: firestore.collection('users'),
     channels : firestore.collection('channels')
 }
-
-export const provider = new firebase.auth.GoogleAuthProvider()
 
 export default firebase;

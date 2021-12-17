@@ -33,7 +33,7 @@ function Profile() {
                             src="/broken-image.jpg"
                         />
                         <h2 id="username">{user.username}</h2>
-                        <button>Edit Avatar</button>
+                        <button onClick={() => setPopoverTitle("avatar")}>Edit Avatar</button>
                     </div>
                     <div className="change_info_controls">
                         <div className="control_field">

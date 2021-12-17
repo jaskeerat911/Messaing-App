@@ -4,7 +4,7 @@ import "./Loader.css"
 function Loader() {
     return (
         <div className="loader-container">
-            <div className="loader"></div>
+            <img className='loader' src="/loader.gif" alt=".loading..." />
         </div>
     )
 }

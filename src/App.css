@@ -29,3 +29,19 @@
     background-color: var(--background-primary);
     box-sizing: border-box;
 }
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #2E3338;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #202225;
+    border-radius: 5px;
+}
