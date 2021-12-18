@@ -28,6 +28,7 @@
     height: 100vh;
     background-color: var(--background-primary);
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 /* width */
