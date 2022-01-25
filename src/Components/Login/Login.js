@@ -1,11 +1,14 @@
-import { Button } from "@material-ui/core";
-import React, { useState, useContext, useEffect } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
 import "./Login.css";
-import { AuthContext } from "./AuthProvider";
-import Loader from "./Loader";
-import { setChannelInfo } from './features/appSlice'
+import Loader from "../Loader/Loader";
+
+import React, { useState, useContext, useEffect } from "react";
 import { useDispatch } from 'react-redux'
+import { NavLink, useNavigate } from "react-router-dom";
+
+import { AuthContext } from "../../Services/AuthProvider";
+import { setChannelInfo } from '../../features/appSlice'
+
+import { Button } from "@material-ui/core";
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 

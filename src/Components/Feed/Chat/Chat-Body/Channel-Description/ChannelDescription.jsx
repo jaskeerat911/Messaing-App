@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+
+import { database } from "../../../../../Services/firebase";
+import { selectChannelId, selectChannelName } from "../../../../../features/appSlice";
+
 import { Avatar, Tooltip, makeStyles } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
-import { database } from "./firebase";
-import { selectChannelId, selectChannelName } from "./features/appSlice";
 
 const useStylesBootstrap = makeStyles((theme) => ({
     arrow: {

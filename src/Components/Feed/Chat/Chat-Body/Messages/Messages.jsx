@@ -1,11 +1,14 @@
+import Message from "./Message/Message";
+
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import Message from "./Message";
-import { selectChannelId, selectChannelName } from "./features/appSlice";
+
+import { selectChannelId, selectChannelName } from "../../../../../features/appSlice";
+import { database } from "../../../../../Services/firebase";
+import firebase from "firebase";
+
 import EmojiEmoticonsIcon from "@material-ui/icons/EmojiEmotions";
 import SendIcon from "@material-ui/icons/Send";
-import { database } from "./firebase";
-import firebase from "firebase";
 import { Picker } from "emoji-mart";
 import "emoji-mart/css/emoji-mart.css";
 

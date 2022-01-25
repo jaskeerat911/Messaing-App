@@ -1,16 +1,19 @@
-import React, { useContext } from "react";
 import "./Sidebar.css";
+import SidebarChannel from "./Sidebar-Channel/SidebarChannel";
+import Loader from "../../Loader/Loader";
+
+import React, { useContext } from "react";
 import {NavLink} from "react-router-dom"
+
+import { database } from "../../../Services/firebase";
+import { AuthContext } from "../../../Services/AuthProvider";
+
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AddIcon from "@material-ui/icons/Add";
-import SidebarChannel from "./SidebarChannel";
 import { Avatar, Tooltip, makeStyles} from "@material-ui/core";
 import MicIcon from "@material-ui/icons/Mic";
 import HeadsetIcon from "@material-ui/icons/Headset";
 import SettingsIcon from "@material-ui/icons/Settings";
-import { database } from "./firebase";
-import { AuthContext } from "./AuthProvider";
-import Loader from "./Loader";
 import PersonIcon from '@material-ui/icons/Person';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 

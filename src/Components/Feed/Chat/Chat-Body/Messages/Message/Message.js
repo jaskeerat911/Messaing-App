@@ -1,7 +1,10 @@
-import { Avatar } from "@material-ui/core";
-import React, {useEffect, useState} from "react";
 import "./Message.css";
-import { database } from "./firebase";
+
+import React, {useEffect, useState} from "react";
+
+import { database } from "../../../../../../Services/firebase";
+
+import { Avatar } from "@material-ui/core";
 
 const Message = ({ timestamp, userId, message }) => {
     let [userData, SetUserData] = useState(null);

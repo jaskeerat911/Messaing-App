@@ -1,12 +1,15 @@
-import React, { useContext, useState, useEffect } from "react";
 import "./Profile.css";
-import { Avatar } from "@material-ui/core";
-import { database } from "./firebase";
-import { AuthContext } from "./AuthProvider";
-import Loader from "./Loader";
-import CloseIcon from "@material-ui/icons/Close";
-import Popover from "./Popover"
+import Loader from "../Loader/Loader";
+import Popover from "./Popover/Popover"
+
+import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
+import { database } from "../../Services/firebase";
+import { AuthContext } from "../../Services/AuthProvider";
+
+import { Avatar } from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
 
 function Profile() {
     let [user, setUser] = useState(null);

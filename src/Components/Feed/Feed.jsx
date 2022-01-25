@@ -1,10 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react'
-import SideBar from "./Sidebar"
-import Chat from './Chat';
 import './feed.css'
-import { database } from "./firebase";
-import { AuthContext } from './AuthProvider';
-import Loader from "./Loader"
+import Chat from './Chat/Chat';
+import SideBar from "./SideBar/Sidebar"
+import Loader from "../Loader/Loader"
+
+import React, { useState, useEffect, useContext } from 'react'
+
+import { database } from "../../Services/firebase";
+import { AuthContext } from '../../Services/AuthProvider';
 
 function Feed() {
     let [user, setUser] = useState(null);

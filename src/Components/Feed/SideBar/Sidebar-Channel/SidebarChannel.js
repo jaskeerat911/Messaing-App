@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { database } from "./firebase";
-import { useDispatch } from "react-redux";
-import { setChannelInfo } from "./features/appSlice";
 import "./SidebarChannel.css";
+
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+
+import { database } from "../../../../Services/firebase";
+import { setChannelInfo } from "../../../../features/appSlice";
 
 const SidebarChannel = ({ id }) => {
     const dispatch = useDispatch();

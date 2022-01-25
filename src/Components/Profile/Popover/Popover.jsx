@@ -1,9 +1,12 @@
-import React, { useContext, useState } from "react";
 import "./Popover.css";
-import CloseIcon from "@material-ui/icons/Close";
-import { database } from "./firebase";
-import { AuthContext } from "./AuthProvider";
+
+import React, { useContext, useState } from "react";
+
+import { database } from "../../../Services/firebase";
+import { AuthContext } from "../../../Services/AuthProvider";
 import firebase from "firebase";
+
+import CloseIcon from "@material-ui/icons/Close";
 
 function Popover({ title, user, setPopover }) {
     let [username, setUsername] = useState(user.username);

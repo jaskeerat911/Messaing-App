@@ -1,9 +1,11 @@
-import React from "react";
 import "./Chat.css";
-import ChatHeader from "./ChatHeader";
-import ChatBody from "./ChatBody";
+import ChatHeader from "./Chat-Header/ChatHeader";
+import ChatBody from "./Chat-Body/ChatBody";
+
+import React from "react";
 import { useSelector } from "react-redux";
-import { selectChannelId, selectChannelName } from "./features/appSlice";
+
+import { selectChannelId, selectChannelName } from "../../../features/appSlice";
 
 const Chat = (props) => {
     const channelId = useSelector(selectChannelId);

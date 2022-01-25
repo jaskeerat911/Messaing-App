@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { Routes, Route, Navigate, Outlet } from "react-router-dom";
-import Login from "./Login";
-import SignUp from "./SignUp";
-import Feed from "./Feed";
-import Profile from "./Profile"
-import AuthProvider, { AuthContext } from "./AuthProvider";
+import Login from "../Login/Login";
+import SignUp from "../SignUp/SignUp";
+import Feed from "../Feed/Feed";
+import Profile from "../Profile/Profile"
+import AuthProvider, { AuthContext } from "../../Services/AuthProvider";
 
 function navigator() {
     return (

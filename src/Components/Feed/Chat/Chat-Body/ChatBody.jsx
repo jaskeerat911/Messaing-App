@@ -1,6 +1,8 @@
+import Messages from './Messages/Messages'
+import ChannelDescription from './Channel-Description/ChannelDescription'
+
 import React from 'react'
-import Messages from './Messages'
-import ChannelDescription from './ChannelDescription'
+
 
 function ChatBody(props) {
     return (

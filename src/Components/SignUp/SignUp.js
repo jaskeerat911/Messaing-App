@@ -1,10 +1,13 @@
-import { Button } from "@material-ui/core";
+import "./SignUp.css"; 
+import Loader from "../Loader/Loader";
+
 import React, { useContext, useState } from "react";
-import { AuthContext } from "./AuthProvider";
-import { storage, database } from "./firebase";
 import { NavLink, useNavigate } from "react-router-dom";
-import Loader from "./Loader";
-import "./SignUp.css";
+
+import { AuthContext } from "../../Services/AuthProvider";
+import { storage, database } from "../../Services/firebase";
+
+import { Button } from "@material-ui/core";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 
