@@ -5,6 +5,7 @@ import React, {useEffect, useState} from "react";
 import { database } from "../../../../../../Services/firebase";
 
 import { Avatar } from "@material-ui/core";
+import moment from 'moment';
 
 const Message = ({ timestamp, userId, message }) => {
     let [userData, SetUserData] = useState(null);
@@ -23,7 +24,7 @@ const Message = ({ timestamp, userId, message }) => {
                     <h4>
                         {userData.username}
                         <span className="message__timestamp">
-                            {new Date(timestamp?.toDate()).toUTCString()}
+                            {moment(timestamp?.toDate()).format('L')}
                         </span>
                     </h4>
 

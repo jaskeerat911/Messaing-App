@@ -2,8 +2,8 @@ import "./Popover.css";
 
 import React, { useContext, useState } from "react";
 
-import { database } from "../../../Services/firebase";
-import { AuthContext } from "../../../Services/AuthProvider";
+import { database } from "../../Services/firebase";
+import { AuthContext } from "../../Services/AuthProvider";
 import firebase from "firebase";
 
 import CloseIcon from "@material-ui/icons/Close";
@@ -120,7 +120,6 @@ function Popover({ title, user, setPopover }) {
                             Done
                         </button>
                     </div>
-                    <CloseIcon id="close" onClick={() => setPopover("")}/>
                 </div>
             )}
             {title === "email" && (
@@ -160,7 +159,6 @@ function Popover({ title, user, setPopover }) {
                             Done
                         </button>
                     </div>
-                    <CloseIcon id="close" onClick={() => setPopover("")}/>
                 </div>
             )}
             {title === "password" && (
@@ -200,7 +198,6 @@ function Popover({ title, user, setPopover }) {
                             Done
                         </button>
                     </div>
-                    <CloseIcon id="close" onClick={() => setPopover("")}/>
                 </div>
             )}
             {title === "avatar" && (
@@ -257,7 +254,6 @@ function Popover({ title, user, setPopover }) {
                             Done
                         </button>
                     </div>
-                    <CloseIcon id="close" onClick={() => setPopover("")}/>
                 </div>
             )}
         </div>

@@ -2,7 +2,7 @@ import "./Sidebar.css";
 import SidebarChannel from "./Sidebar-Channel/SidebarChannel";
 import Loader from "../../Loader/Loader";
 
-import React, { useContext } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import {NavLink} from "react-router-dom"
 
 import { database } from "../../../Services/firebase";
@@ -16,6 +16,7 @@ import HeadsetIcon from "@material-ui/icons/Headset";
 import SettingsIcon from "@material-ui/icons/Settings";
 import PersonIcon from '@material-ui/icons/Person';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { v4 as uuidv4 } from 'uuid';
 
 const useStylesBootstrap = makeStyles((theme) => ({
     arrow: {
@@ -38,24 +39,42 @@ function BootstrapTooltip(props) {
 }
 
 const Sidebar = (props) => {
+    const ref = useRef();
     let { user } = props;
-
     let { genericLogout } = useContext(AuthContext);
+    let [showNewChannelInput, setShowNewChannelInput] = useState(false);
+    let [newChannelName, setNewChannelName] = useState('');
+
+    useEffect(() => {
+        const handleOutsideClick = (e) => {
+            if (showNewChannelInput && ref.current && !ref.current.contains(e.target)) {
+                setShowNewChannelInput(false)
+              }
+        }
+        document.addEventListener("click", handleOutsideClick);
+    }, [showNewChannelInput])
 
     const logOutFn = async () => {
         await genericLogout();
     };
     const handleAddChannel = (e) => {
         e.preventDefault();
+        setShowNewChannelInput(true);
 
-        const channelName = prompt("Enter a new channel name");
+        let uniqueChannelId = uuidv4();
 
-        if (channelName) {
-            database.channels.add({
-                channelName: channelName,
+        if (newChannelName) {
+            database.channels.doc(uniqueChannelId).set({
+                channelName: newChannelName,
+                channelId: uniqueChannelId,
+                adminId : user.userId,
                 users: [user.userId],
             });
+
+            setShowNewChannelInput(false);
+            setNewChannelName('');
         }
+
 
         //need optimisation
         database.channels.get().then((doc) => {
@@ -65,7 +84,7 @@ const Sidebar = (props) => {
             }));
 
             documents.forEach((ele) => {
-                if (channelName === ele.channel.channelName) {
+                if (newChannelName === ele.channel.channelName) {
                     let updatedChannels = [];
                     if (user.channels) {
                         updatedChannels = [...user.channels, ele.id];
@@ -116,10 +135,28 @@ const Sidebar = (props) => {
                     </div>
 
                     <BootstrapTooltip title="Add Channel" placement="right" arrow>
-                        <AddIcon onClick={handleAddChannel} className="sidebar__addChannel" />
+                        <AddIcon onClick={handleAddChannel} className="sidebar__addChannel" ref={ref}/>
                     </BootstrapTooltip>
                 </div>
                 <div className="sidebar__channelsList">
+                    {showNewChannelInput ? (
+                        <div className="newChannelInput">
+                            <h1>#</h1>
+                            <input
+                                type="text"
+                                name="newChannelName"
+                                autoFocus
+                                onChange={function (e) {
+                                    setNewChannelName(e.target.value);
+                                }}
+                                onKeyDown={(e) => {
+                                    if (e.key === "Enter") handleAddChannel(e);
+                                }}
+                            />
+                        </div>
+                    ) : (
+                        <></>
+                    )}
                     {user.channels ? (
                         user.channels.map((id) => <SidebarChannel key={id} id={id} />)
                     ) : (
@@ -138,15 +175,15 @@ const Sidebar = (props) => {
                 <div className="sidebar__profileIcons">
                     <MicIcon />
                     <HeadsetIcon />
-                    <SettingsIcon id="profile_settings" onClick={handleDropdown}/>
+                    <SettingsIcon id="profile_settings" onClick={handleDropdown} />
                     <div className="dropdown">
-                        <NavLink to ={`/profile/${user.userId}`}  className="dropdown_content">
+                        <NavLink to={`/profile/${user.userId}`} className="dropdown_content">
                             Profile
-                            <PersonIcon/>
+                            <PersonIcon />
                         </NavLink>
                         <div className="dropdown_content" onClick={logOutFn}>
                             Log Out
-                            <ExitToAppIcon/>
+                            <ExitToAppIcon />
                         </div>
                     </div>
                 </div>

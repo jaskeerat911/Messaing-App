@@ -30,17 +30,35 @@
 
 .sidebar__header {
     display: flex;
-    align-items: center;
 }
-
 
 .sidebar__addChannel {
     cursor: pointer;
-    padding: 5px;
 }
 
 .sidebar__addChannel:hover {
     color: var(--header-primary);
+}
+
+.sidebar__channelsList > .newChannelInput{
+    padding-left: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar__channelsList > .newChannelInput > input{
+    height: 25px;
+    background: none;
+    color: white;
+    border: none;
+    border-bottom: 1px solid gray;
+    outline: none;
+    font-size: 16px;
+}
+
+.sidebar__channelsList > .newChannelInput > h1{
+    margin-right: 14px;
+    color: var(--header-tertiary);
 }
 
 .sidebar__profile {
@@ -77,7 +95,7 @@
 }
 
 .sidebar__profileIcons>.MuiSvgIcon-root {
-    padding: 5px;
+    margin: 0 5px;
 }
 
 .sidebar__profileIcons>#profile_settings{

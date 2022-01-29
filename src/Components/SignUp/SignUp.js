@@ -3,9 +3,11 @@ import Loader from "../Loader/Loader";
 
 import React, { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux'
 
 import { AuthContext } from "../../Services/AuthProvider";
 import { storage, database } from "../../Services/firebase";
+import { setChannelInfo } from '../../features/appSlice'
 
 import { Button } from "@material-ui/core";
 import VisibilityIcon from "@material-ui/icons/Visibility";
@@ -20,6 +22,7 @@ function SignUp() {
     let [passwordShown, setPasswordShown] = useState(false);
     let [file, setFile] = useState(null);
     let history = useNavigate();
+    const dispatch = useDispatch();
 
     let { genericSignup } = useContext(AuthContext);
 
@@ -28,6 +31,11 @@ function SignUp() {
             setLoader(true);
             let userCredential = await genericSignup(email, password);
             let uid = userCredential.user.uid;
+            dispatch(setChannelInfo({
+                channelId: null,
+                channelName: null,
+                adminId: null,
+            }));
 
             database.users.doc(uid).set({
                 userId: uid,

@@ -14,6 +14,7 @@ const SidebarChannel = ({ id }) => {
         database.channels.doc(id).onSnapshot((doc) => {
             setChannelData(doc.data());
         });
+        return 
     }, [id]);
 
     const handlSidebarChannel = (e) => {
@@ -21,11 +22,11 @@ const SidebarChannel = ({ id }) => {
             setChannelInfo({
                 channelId: id,
                 channelName: channelData.channelName,
+                adminId: channelData.adminId,
             })
         );
         
         let selectedChannel = document.querySelector(".sidebarChannel.selected");
-        console.log(selectedChannel)
         if (selectedChannel) {
             selectedChannel.classList.remove("selected");
         }

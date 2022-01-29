@@ -1,3 +1,4 @@
+import './ChatBody.css'
 import Messages from './Messages/Messages'
 import ChannelDescription from './Channel-Description/ChannelDescription'
 
@@ -8,7 +9,7 @@ function ChatBody(props) {
     return (
         <div className = 'chat__body'>
             <Messages user ={props.user} channelId={props.channelId} channelName={props.channelName} />
-            <ChannelDescription channelId={props.channelId} channelName={props.channelName}/>
+            <ChannelDescription currentUser={props.user}/>
         </div>
     )
 }

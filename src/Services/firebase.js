@@ -1,13 +1,13 @@
 import firebase from 'firebase'
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBdZoSJIHwhWJbhSlrEU7xtoy05Ucu5pMk",
-    authDomain: "chat-app-23ce6.firebaseapp.com",
-    projectId: "chat-app-23ce6",
-    storageBucket: "chat-app-23ce6.appspot.com",
-    messagingSenderId: "374689419180",
-    appId: "1:374689419180:web:026ba98633a33212207409"
-};
+    apiKey: "AIzaSyDcZOov6y3oBSbTK-1tzY9Xoz8o_bfpeOM",
+    authDomain: "discord-chat-app-97c9b.firebaseapp.com",
+    projectId: "discord-chat-app-97c9b",
+    storageBucket: "discord-chat-app-97c9b.appspot.com",
+    messagingSenderId: "170161618795",
+    appId: "1:170161618795:web:9a9e52d4a8c579e4e0d62e"
+  };
 
 firebase.initializeApp(firebaseConfig)
 const firestore = firebase.firestore();

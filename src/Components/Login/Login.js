@@ -30,7 +30,8 @@ const Login = () => {
             setLoginLoader(false);
             dispatch(setChannelInfo({
                 channelId: null,
-                channelName: null
+                channelName: null,
+                adminId: null,
             }));
             history("/feed");
         } catch (err) {

@@ -1,6 +1,6 @@
 import "./Profile.css";
 import Loader from "../Loader/Loader";
-import Popover from "./Popover/Popover"
+import Popover from "../Popover/Popover"
 
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";

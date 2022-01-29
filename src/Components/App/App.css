@@ -21,13 +21,14 @@
     --text-link: #00aff4;
     --text-area: #40444b;
     --text-danger : #ed4245;
+    --text-muted: #72767d;
 }
 
 .container{
     width: 100vw;
     height: 100vh;
     background-color: var(--background-primary);
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     overflow: hidden;
 }
 

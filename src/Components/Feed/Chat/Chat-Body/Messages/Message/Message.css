@@ -5,16 +5,30 @@
     color: var(--header-primary);
 }
 
+.message:hover{
+    background-color: rgba(47, 49, 54, 0.5);
+}
+
 .message > .MuiAvatar-root{
     background-color: #42464b;
 }
 
 .message__info{
+    font-size: 16px;
     margin-left: 20px;
 }
 
+.message__info > h4{
+    font-weight: 500;
+    margin-bottom: 3px;
+}
+
+.message__info > p{
+    color: var(--text-normal);
+}
+
 .message__timestamp{
-    color: var(--header-tertiary);
-    margin-left: 20px;
-    font-size: x-small;
+    color: var(--text-muted);
+    margin-left: 10px;
+    font-size: 12px;
 }

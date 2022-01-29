@@ -1,6 +1,8 @@
+import './Messages.css'
 import Message from "./Message/Message";
+import Loader from '../../../../Loader/Loader';
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 
 import { selectChannelId, selectChannelName } from "../../../../../features/appSlice";
@@ -32,6 +34,13 @@ function Messages(props) {
         }
     }, [channelId]);
 
+    useEffect(() => {
+        const chatContainer = document.querySelector('.chat__messages');
+        if (chatContainer){
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+    }, [messages])
+
     const sendMessage = (e) => {
         // e.preventDefault();
 
@@ -47,24 +56,28 @@ function Messages(props) {
     const addEmoji = (e) => {
         let emojiCode = e.unified.split("-");
         let emoji = String.fromCodePoint("0x" + emojiCode);
-        console.log(emoji);
+        // console.log(emoji);
         setInput(input + emoji);
     };
 
     return (
         <div className="chat__messages__body">
-            <div className="chat__messages">
-                {/* {messages.map((message) => {
+            {!channelId ? <img className="chat_background" src='/Chat-Background.svg' alt='' /> :
+                <div className="chat__messages" >
+                    {/* {messages.map((message) => {
                             console.log(message);
-                        })} */}
-                {messages.map((message) => (
-                    <Message
-                        message={message.message}
-                        timestamp={message.timestamp}
-                        userId={message.userId}
-                    />
-                ))}
-            </div>
+                        })
+                    } */}
+                    {messages.map((message) => (
+                        <Message
+                            message={message.message}
+                            timestamp={message.timestamp}
+                            userId={message.userId}
+                        />
+                        ))
+                    }
+                </div>
+            }
 
             {channelName ? (
                 <div className="chat__input">
